@@ -1,0 +1,24 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:js-app', // https://docs.renovatebot.com/presets-config/#configjs-app
+    ':semanticCommits',
+    ':semanticCommitTypeAll(chore)',
+  ],
+  commitMessageAction: '🔗 update',
+  internalChecksFilter: 'strict', // required for packageRules[].stabilityDays
+  dependencyDashboard: true,
+  dependencyDashboardApproval: true, // require approval for all updates initially
+  pin: {
+    dependencyDashboardApproval: false,
+    automerge: true,
+  },
+  separateMinorPatch: true,
+  separateMajorMinor: true,
+  packageRules: [
+    {
+      matchDatasources: ['npm'],
+      stabilityDays: 3, // npm packages less than 72 hours (3 days) old can be unpublished
+    },
+  ],
+}
